@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Events & Celebrations | Event Planning</title>
+  <style>
+    /* ---------------- CSS VARIABLES & RESET ---------------- */
+    :root {
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --secondary: #0f172a;
+      --accent: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --radius: 12px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---------------- NAVIGATION ---------------- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn-nav {
+      background: var(--primary);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 20px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-nav:hover {
+      background: var(--primary-hover);
+    }
+
+    /* ---------------- HERO SECTION ---------------- */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: #fff;
+      padding: 100px 0 120px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      max-width: 650px;
+      margin: 0 auto 30px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 30px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      background: #d97706;
+      color: #fff;
+    }
+
+    /* ---------------- SECTION COMMON ---------------- */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+    }
+
+    /* ---------------- COMBO OFFERS SECTION ---------------- */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .offer-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ecfdf5;
+      color: #059669;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .badge.popular {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .offer-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: var(--secondary);
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .price span {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .features-list li {
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .features-list li::before {
+      content: "✔";
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .offer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-select {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-select:hover {
+      background: var(--primary-hover);
+    }
+
+    .sub-link {
+      font-size: 0.85rem;
+      color: var(--primary);
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .sub-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------------- BOOKING / GOOGLE FORM SECTION ---------------- */
+    .form-section {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .form-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    .form-info p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .form-info ul {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .form-info li {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 10px;
+      color: var(--text);
+    }
+
+    .btn-external-form {
+      display: inline-block;
+      background: var(--secondary);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-external-form:hover {
+      background: #334155;
+    }
+
+    .form-embed-container {
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      height: 520px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-embed-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    /* ---------------- MODAL / POPUP ---------------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      background: var(--secondary);
+      color: #94a3b8;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .form-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .form-embed-container {
+        height: 400px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Aura<span>Events</span></div>
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#offers">Combo Offers</a></li>
+          <li><a href="#book">Book Consultation</a></li>
+          <li><a href="#book" class="btn-nav">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <h1>Unforgettable Moments, Flawlessly Executed</h1>
+      <p>From dream weddings to high-impact corporate summits, we handle venue, decor, catering, and entertainment all in one place.</p>
+      <a href="#offers" class="hero-btn">Explore Combo Offers</a>
+    </div>
+  </section>
+
+  <!-- COMBO OFFERS SECTION -->
+  <section id="offers">
+    <div class="container">
+      <div class="section-title">
+        <h2>Exclusive Event Combos</h2>
+        <p>Bundle your services to save up to 30% with our curated packages.</p>
+      </div>
+
+      <div class="offers-grid">
+
+        <!-- Combo 1 -->
+        <div class="offer-card">
+          <span class="badge">Standard</span>
+          <div>
+            <h3>Birthday & Intimate Bash</h3>
+            <div class="price">$799 <span>$1,100</span></div>
+            <ul class="features-list">
+              <li>Theme Balloon & Floral Styling</li>
+              <li>Professional Sound & Mic System</li>
+              <li>2-Hour Candid Photography</li>
+              <li>Custom 2-Tier Designer Cake</li>
+            </ul>
+          </div>
+          <div class="offer-links">
+            <button class="btn-select" onclick="selectOffer('Birthday & Intimate Bash')">Choose Package</button>
+            <a class="sub-link" onclick="openDetailsModal('birthday')">View Breakdown & Sub-Details →</a>
+          </div>
+        </div>
+
+        <!-- Combo 2 -->
+        <div class="offer-card" style="border: 2px solid var(--primary);">
+          <span class="badge popular">Most Popular</span>
+          <div>
+            <h3>Grand Wedding Combo</h3>
+            <div class="price">$3,499 <span>$4,800</span></div>
+            <ul class="features-list">
+              <li>Complete Stage & Hall Decoration</li>
+              <li>Buffet Catering Setup (Up to 150 Pax)</li>
+              <li>Cinematic Video & Full-Day Photography</li>
+              <li>Live DJ & Atmospheric Lighting</li>
+              <li>Personal Day-Of Event Coordinator</li>
+            </ul>
+          </div>
+          <div class="offer-links">
+            <button class="btn-select" onclick="selectOffer('Grand Wedding Combo')">Choose Package</button>
+            <a class="sub-link" onclick="openDetailsModal('wedding')">View Breakdown & Sub-Details →</a>
+          </div>
+        </div>
+
+        <!-- Combo 3 -->
+        <div class="offer-card">
+          <span class="badge">Corporate</span>
+          <div>
+            <h3>Corporate Summit & Gala</h3>
+            <div class="price">$2,199 <span>$2,900</span></div>
+            <ul class="features-list">
+              <li>Dual LED Screen & Projector Setup</li>
+              <li>Branded Stage Backdrop & Podium</li>
+              <li>Hi-Tea & Premium Executive Lunch</li>
+              <li>Keynote Audio Recording & Streaming</li>
+            </ul>
+          </div>
+          <div class="offer-links">
+            <button class="btn-select" onclick="selectOffer('Corporate Summit & Gala')">Choose Package</button>
+            <a class="sub-link" onclick="openDetailsModal('corporate')">View Breakdown & Sub-Details →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING & GOOGLE FORM SECTION -->
+  <section id="book">
+    <div class="container">
+      <div class="form-section">
+        <div class="form-wrapper">
+          <div class="form-info">
+            <h3>Reserve Your Date</h3>
+            <p>Fill out our quick form so we can prepare a tailored quotation and reserve team availability for your date.</p>
+            <ul>
+              <li><strong>Selected Package:</strong> <span id="displaySelectedPackage" style="color: var(--primary); font-weight: 700;">None (Select above or fill in form)</span></li>
+              <li><strong>Response Time:</strong> Within 12 business hours</li>
+              <li><strong>Direct Contact:</strong> +1 (555) 019-2834</li>
+            </ul>
+            <!-- Direct External Link to your Google Form -->
+            <a id="googleFormDirectBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSc_EXAMPLE_FORM_ID/viewform" target="_blank" class="btn-external-form">
+              Open Form in Full Tab ↗
+            </a>
+          </div>
+
+          <!-- Embedded Google Form Container -->
+          <div class="form-embed-container">
+            <!-- 
+              REPLACE the 'src' link below with your Google Form Embed URL:
+              Go to Google Forms -> Click 'Send' -> Click '< >' (Embed HTML) -> Copy the src URL
+            -->
+            <iframe 
+              id="googleFormIframe"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSc_EXAMPLE_FORM_ID/viewform?embedded=true">
+              Loading Google Form…
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUB-DETAILS MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeDetailsModal()">&times;</button>
+      <h3 id="modalTitle">Offer Details</h3>
+      <div id="modalBody" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
+        <!-- Dynamic content filled by JS -->
+      </div>
+      <button class="btn-select" style="width: 100%;" onclick="proceedFromModal()">Select this Offer</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Aura Events Management. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Data store for sub-links / modals
+    const offerDetailsData = {
+      birthday: {
+        title: "Birthday & Intimate Bash — Details",
+        description: "Includes end-to-end setup 3 hours prior to the event. You receive a dedicated sound technician, 50 edited high-res digital photos delivered within 4 days, choice of chocolate truffle or red velvet cake, and an interactive host for kids or party games."
+      },
+      wedding: {
+        title: "Grand Wedding Combo — Details",
+        description: "Our complete worry-free wedding package. Includes venue scouting assistance, floral mandate, entrance arch, customized couple stage backdrop, drone footage, 40-page velvet photo album, multi-cuisine buffet management, and complete vendor coordination."
+      },
+      corporate: {
+        title: "Corporate Summit & Gala — Details",
+        description: "Designed for corporate summits, product launches, and award nights. Features high-lumen laser projectors, branded delegate lanyards and badges, sound engineers on-site, and full HD master recording delivered next business day."
+      }
+    };
+
+    let currentlyViewing = "";
+
+    function openDetailsModal(key) {
+      currentlyViewing = key;
+      const data = offerDetailsData[key];
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalBody').innerText = data.description;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeDetailsModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function proceedFromModal() {
+      const packageNames = {
+        birthday: "Birthday & Intimate Bash",
+        wedding: "Grand Wedding Combo",
+        corporate: "Corporate Summit & Gala"
+      };
+      selectOffer(packageNames[currentlyViewing]);
+      closeDetailsModal();
+    }
+
+    function selectOffer(packageName) {
+      // 1. Update the label on the website
+      document.getElementById('displaySelectedPackage').innerText = packageName;
+
+      // 2. Smoothly scroll down to the Google Form section
+      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+
+      // 3. Optional: You can auto-fill a Google Form question using pre-filled URLs!
+      // Example pre-filled structure:
+      // const baseForm = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?usp=pp_url&entry.123456=" + encodeURIComponent(packageName);
+      // document.getElementById('googleFormIframe').src = baseForm + "&embedded=true";
+      // document.getElementById('googleFormDirectBtn').href = baseForm;
+    }
+
+    // Close modal if user clicks outside of modal content
+    window.addEventListener('click', (e) => {
+      const overlay = document.getElementById('modalOverlay');
+      if (e.target === overlay) {
+        closeDetailsModal();
+      }
+    });
+  </script>
+</body>
+</html>
